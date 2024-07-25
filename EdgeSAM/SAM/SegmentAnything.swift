@@ -39,6 +39,16 @@ public class SegmentAnything {
         let encoderInput = edge_sam_3x_encoderInput(image: resizedImage)
         let encoderOutput = try! self.encoder.prediction(input: encoderInput)
         self.imageEmbeddings = encoderOutput.image_embeddings
+        //print(self.imageProcessor.mapPoints(points: [(100.0, 100.0)]))
+    }
+ 
+    public func predictMask(points: [(Float, Float, Int)])/* -> [(MTLTexture)] */ -> MLMultiArray {
+        let (pointsTensor, labelTensor) = self.imageProcessor.mapPoints(points: points)
+        
+        let decoderInput = edge_sam_3x_decoderInput(image_embeddings: self.imageEmbeddings, point_coords: pointsTensor, point_labels: labelTensor)
+        let decoderOutput = try! self.decoder.prediction(input: decoderInput)
+        let masks = decoderOutput.masks
+        return masks
     }
     
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import CoreML
 
 struct ContentView: View {
     
@@ -24,6 +25,8 @@ struct ContentView: View {
                 Task(priority: .high) {
                     let imageTexture = try! await self.textureLoader.loadTexture(uiImage: inputImage)
                     self.segmentAnything.preprocess(image: imageTexture)
+                    let masks = self.segmentAnything.predictMask(points: [(100.0, 100.0, 1)])
+                    
                     //print(self.segmentAnything.imageEmbeddings!)
                 }
             }

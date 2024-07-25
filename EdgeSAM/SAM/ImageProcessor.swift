@@ -97,7 +97,23 @@ class ImageProcessor {
                       inputSize as NSNumber,
                       1]
         )
+    }
+    
+    func postprocess() {
         
+    }
+    
+    /// Returns MLMultiArray for points and labels based on a tuple point: (x, y, label)
+    func mapPoints(points: [(Float, Float, Int)]) -> (MLMultiArray, MLMultiArray) {
+        let pointsShape = [1, points.count, 2]
+        let labelsShape = [1, points.count]
+        let scaleWidth = Float(self.resizedWidth) / Float(self.originalWidth)
+        let scaleHeight = Float(self.resizedHeight) / Float(self.originalHeight)
+        
+        let pointsTensor = MLShapedArray<Float>(scalars: points.map({[$0.0 * scaleWidth, $0.1 * scaleHeight]}).reduce(into: [], { $0.append(contentsOf: $1)}), shape: pointsShape)
+        let labelTensor = MLShapedArray<Float>(scalars: points.map({Float($0.2)}), shape: labelsShape)
+        
+        return (MLMultiArray(pointsTensor), MLMultiArray(labelTensor))
     }
     
 }
