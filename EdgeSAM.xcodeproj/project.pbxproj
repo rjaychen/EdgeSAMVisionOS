@@ -1,0 +1,417 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		327CBC942C52CD9700DFAA49 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 327CBC932C52CD9700DFAA49 /* RealityKitContent */; };
+		327CBC962C52CD9700DFAA49 /* EdgeSAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC952C52CD9700DFAA49 /* EdgeSAMApp.swift */; };
+		327CBC982C52CD9700DFAA49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC972C52CD9700DFAA49 /* ContentView.swift */; };
+		327CBC9A2C52CD9700DFAA49 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC992C52CD9700DFAA49 /* AppModel.swift */; };
+		327CBC9C2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */; };
+		327CBC9E2C52CD9700DFAA49 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */; };
+		327CBCA02C52CD9800DFAA49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */; };
+		327CBCA32C52CD9800DFAA49 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327CBCA22C52CD9800DFAA49 /* Preview Assets.xcassets */; };
+		327CBCAB2C52CE3000DFAA49 /* SegmentAnything.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCAA2C52CE2900DFAA49 /* SegmentAnything.swift */; };
+		327CBCAE2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCAD2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage */; };
+		327CBCAF2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCAC2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage */; };
+		327CBCB22C52CFB400DFAA49 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCB12C52CFAF00DFAA49 /* ImageProcessor.swift */; };
+		327CBCB82C52D20E00DFAA49 /* ImageProcessingFuncs.metal in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCB72C52D1FD00DFAA49 /* ImageProcessingFuncs.metal */; };
+		327CBCBC2C52E44B00DFAA49 /* TextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCBB2C52E44800DFAA49 /* TextureLoader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		327CBC8E2C52CD9700DFAA49 /* EdgeSAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdgeSAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		327CBC922C52CD9700DFAA49 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		327CBC952C52CD9700DFAA49 /* EdgeSAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeSAMApp.swift; sourceTree = "<group>"; };
+		327CBC972C52CD9700DFAA49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		327CBC992C52CD9700DFAA49 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
+		327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		327CBCA22C52CD9800DFAA49 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		327CBCA42C52CD9800DFAA49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		327CBCAA2C52CE2900DFAA49 /* SegmentAnything.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentAnything.swift; sourceTree = "<group>"; };
+		327CBCAC2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = edge_sam_3x_decoder.mlpackage; sourceTree = "<group>"; };
+		327CBCAD2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = edge_sam_3x_encoder.mlpackage; sourceTree = "<group>"; };
+		327CBCB12C52CFAF00DFAA49 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		327CBCB72C52D1FD00DFAA49 /* ImageProcessingFuncs.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ImageProcessingFuncs.metal; sourceTree = "<group>"; };
+		327CBCB92C52D99A00DFAA49 /* SharedInputs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedInputs.h; sourceTree = "<group>"; };
+		327CBCBA2C52DA3E00DFAA49 /* EdgeSAM-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EdgeSAM-Bridging-Header.h"; sourceTree = "<group>"; };
+		327CBCBB2C52E44800DFAA49 /* TextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLoader.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		327CBC8B2C52CD9700DFAA49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				327CBC942C52CD9700DFAA49 /* RealityKitContent in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		327CBC852C52CD9700DFAA49 = {
+			isa = PBXGroup;
+			children = (
+				327CBC902C52CD9700DFAA49 /* EdgeSAM */,
+				327CBC912C52CD9700DFAA49 /* Packages */,
+				327CBC8F2C52CD9700DFAA49 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		327CBC8F2C52CD9700DFAA49 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				327CBC8E2C52CD9700DFAA49 /* EdgeSAM.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		327CBC902C52CD9700DFAA49 /* EdgeSAM */ = {
+			isa = PBXGroup;
+			children = (
+				327CBC952C52CD9700DFAA49 /* EdgeSAMApp.swift */,
+				327CBC972C52CD9700DFAA49 /* ContentView.swift */,
+				327CBCBB2C52E44800DFAA49 /* TextureLoader.swift */,
+				327CBCB02C52CFA100DFAA49 /* SAM */,
+				327CBC992C52CD9700DFAA49 /* AppModel.swift */,
+				327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */,
+				327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */,
+				327CBCAD2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage */,
+				327CBCAC2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage */,
+				327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */,
+				327CBCA42C52CD9800DFAA49 /* Info.plist */,
+				327CBCA12C52CD9800DFAA49 /* Preview Content */,
+			);
+			path = EdgeSAM;
+			sourceTree = "<group>";
+		};
+		327CBC912C52CD9700DFAA49 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				327CBC922C52CD9700DFAA49 /* RealityKitContent */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		327CBCA12C52CD9800DFAA49 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				327CBCA22C52CD9800DFAA49 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		327CBCB02C52CFA100DFAA49 /* SAM */ = {
+			isa = PBXGroup;
+			children = (
+				327CBCB92C52D99A00DFAA49 /* SharedInputs.h */,
+				327CBCBA2C52DA3E00DFAA49 /* EdgeSAM-Bridging-Header.h */,
+				327CBCB72C52D1FD00DFAA49 /* ImageProcessingFuncs.metal */,
+				327CBCB12C52CFAF00DFAA49 /* ImageProcessor.swift */,
+				327CBCAA2C52CE2900DFAA49 /* SegmentAnything.swift */,
+			);
+			path = SAM;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		327CBC8D2C52CD9700DFAA49 /* EdgeSAM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 327CBCA72C52CD9800DFAA49 /* Build configuration list for PBXNativeTarget "EdgeSAM" */;
+			buildPhases = (
+				327CBC8A2C52CD9700DFAA49 /* Sources */,
+				327CBC8B2C52CD9700DFAA49 /* Frameworks */,
+				327CBC8C2C52CD9700DFAA49 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EdgeSAM;
+			packageProductDependencies = (
+				327CBC932C52CD9700DFAA49 /* RealityKitContent */,
+			);
+			productName = EdgeSAM;
+			productReference = 327CBC8E2C52CD9700DFAA49 /* EdgeSAM.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		327CBC862C52CD9700DFAA49 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					327CBC8D2C52CD9700DFAA49 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 327CBC892C52CD9700DFAA49 /* Build configuration list for PBXProject "EdgeSAM" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 327CBC852C52CD9700DFAA49;
+			productRefGroup = 327CBC8F2C52CD9700DFAA49 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				327CBC8D2C52CD9700DFAA49 /* EdgeSAM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		327CBC8C2C52CD9700DFAA49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				327CBCA32C52CD9800DFAA49 /* Preview Assets.xcassets in Resources */,
+				327CBCA02C52CD9800DFAA49 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		327CBC8A2C52CD9700DFAA49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				327CBCBC2C52E44B00DFAA49 /* TextureLoader.swift in Sources */,
+				327CBC9C2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift in Sources */,
+				327CBCB22C52CFB400DFAA49 /* ImageProcessor.swift in Sources */,
+				327CBC982C52CD9700DFAA49 /* ContentView.swift in Sources */,
+				327CBC9E2C52CD9700DFAA49 /* ImmersiveView.swift in Sources */,
+				327CBCB82C52D20E00DFAA49 /* ImageProcessingFuncs.metal in Sources */,
+				327CBC9A2C52CD9700DFAA49 /* AppModel.swift in Sources */,
+				327CBC962C52CD9700DFAA49 /* EdgeSAMApp.swift in Sources */,
+				327CBCAE2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage in Sources */,
+				327CBCAF2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage in Sources */,
+				327CBCAB2C52CE3000DFAA49 /* SegmentAnything.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		327CBCA52C52CD9800DFAA49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = xros;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		327CBCA62C52CD9800DFAA49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = xros;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		327CBCA82C52CD9800DFAA49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"EdgeSAM/Preview Content\"";
+				DEVELOPMENT_TEAM = 9GR6NHS2TT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rjchen.EdgeSAM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "EdgeSAM/SAM/EdgeSAM-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Debug;
+		};
+		327CBCA92C52CD9800DFAA49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"EdgeSAM/Preview Content\"";
+				DEVELOPMENT_TEAM = 9GR6NHS2TT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rjchen.EdgeSAM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "EdgeSAM/SAM/EdgeSAM-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		327CBC892C52CD9700DFAA49 /* Build configuration list for PBXProject "EdgeSAM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				327CBCA52C52CD9800DFAA49 /* Debug */,
+				327CBCA62C52CD9800DFAA49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		327CBCA72C52CD9800DFAA49 /* Build configuration list for PBXNativeTarget "EdgeSAM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				327CBCA82C52CD9800DFAA49 /* Debug */,
+				327CBCA92C52CD9800DFAA49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		327CBC932C52CD9700DFAA49 /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 327CBC862C52CD9700DFAA49 /* Project object */;
+}
