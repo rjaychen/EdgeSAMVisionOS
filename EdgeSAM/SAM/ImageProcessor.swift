@@ -1,4 +1,5 @@
 import Metal
+import MetalPerformanceShaders
 import CoreML
 
 class ImageProcessor {
@@ -99,8 +100,82 @@ class ImageProcessor {
         )
     }
     
-    func postprocess() {
+    func postprocess(masks: MLMultiArray, commandQueue: MTLCommandQueue) -> [MTLTexture] {
+        let scale = Float(self.outputSize) / Float(max(self.originalWidth, self.originalHeight))
+        let scaledWidth = (Float(self.originalWidth) * scale).rounded()
+        let scaledHeight = (Float(self.originalHeight) * scale).rounded()
+        let scaleSizeFactor = SIMD2<Float>(scaledWidth / Float(self.outputSize),
+                                           scaledHeight / Float(self.outputSize))
+        var outputMasks = [MTLTexture]()
         
+        let commandBuffer = commandQueue.makeCommandBuffer()!
+        
+        let threadgroupSize = MTLSize(width: self.postprocessComputePipelineState.threadExecutionWidth, // MARK: Diff from original
+                                      height: self.postprocessComputePipelineState.maxTotalThreadsPerThreadgroup / self.postprocessComputePipelineState.threadExecutionWidth,
+                                      depth: 1)
+        let gridSizeOrThreads: MTLSize
+        if self.device.supportsFamily(.common3) {
+            gridSizeOrThreads = MTLSize(width: self.originalWidth,
+                                        height: self.originalHeight,
+                                        depth: 1)
+        } else {
+            gridSizeOrThreads = MTLSize(width: (self.originalWidth + threadgroupSize.width - 1) / threadgroupSize.width,
+                                        height: (self.originalWidth + threadgroupSize.height - 1) / threadgroupSize.height,
+                                        depth: 1)
+        }
+        let outputMaskTextureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .r32Float,
+                                                                                   width: self.originalWidth,
+                                                                                   height: self.originalHeight,
+                                                                                   mipmapped: false)
+        outputMaskTextureDescriptor.usage = [.shaderRead, .shaderWrite]
+        outputMaskTextureDescriptor.storageMode = .shared
+        
+        let maskTextureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .r32Float,
+                                                                             width: masks.shape[3].intValue,
+                                                                             height: masks.shape[2].intValue,
+                                                                             mipmapped: false)
+        maskTextureDescriptor.storageMode = .shared
+        
+        var postprocessingInput = PostprocessingInput(scaleSizeFactor: scaleSizeFactor)
+        
+        let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()!
+        computeCommandEncoder.setComputePipelineState(self.postprocessComputePipelineState)
+        computeCommandEncoder.setBytes(&postprocessingInput, length: MemoryLayout<PostprocessingInput>.stride, index: 0)
+        masks.withUnsafeMutableBytes { pointer, strides in
+            let maskPointer = pointer.bindMemory(to: Float.self).baseAddress!
+            let maskStride = strides[1]
+            
+            for maskIndex in 0..<masks.shape[1].intValue { // 4 masks total
+                let maskTexture: MTLTexture
+                let maskBuffer = self.device.makeBuffer(bytesNoCopy: maskPointer + maskIndex * maskStride,
+                                                        length: maskStride * MemoryLayout<Float>.stride)!
+                maskTexture = maskBuffer.makeTexture(descriptor: maskTextureDescriptor,
+                                                     offset: 0,
+                                                     bytesPerRow: strides[2] * MemoryLayout<Float>.stride)!
+                let outputMaskTexture = self.device.makeTexture(descriptor: outputMaskTextureDescriptor)!
+                
+                computeCommandEncoder.setTexture(maskTexture, index: 0)
+                computeCommandEncoder.setTexture(outputMaskTexture, index: 1)
+                
+                if self.device.supportsFamily(.common3) {
+                    computeCommandEncoder.dispatchThreads(gridSizeOrThreads, threadsPerThreadgroup: threadgroupSize)
+                } else {
+                    computeCommandEncoder.dispatchThreadgroups(gridSizeOrThreads, threadsPerThreadgroup: threadgroupSize)
+                }
+                outputMasks.append(outputMaskTexture)
+            }
+        }
+        computeCommandEncoder.endEncoding()
+        
+//        let gaussianFilter = MPSImageGaussianBlur(device: device, sigma: 5)
+//        for maskIndex in 0..<outputMasks.count {
+//            gaussianFilter.encode(commandBuffer: commandBuffer, inPlaceTexture: &outputMasks[maskIndex])
+//        }
+        
+        commandBuffer.commit()
+        commandBuffer.waitUntilCompleted()
+        
+        return outputMasks
     }
     
     /// Returns MLMultiArray for points and labels based on a tuple point: (x, y, label)
