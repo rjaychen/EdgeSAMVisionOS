@@ -20,13 +20,13 @@ class TextureLoader {
             ]
         ), let cgImage = self.ciContext.createCGImage(ciImage, from: ciImage.extent)
         else { throw NSError() }
-    
-    #if targetEnvironment(simulator)
+        
+#if targetEnvironment(simulator)
         let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(
-          pixelFormat: .bgra8Unorm,
-          width: Int(ciImage.extent.width),
-          height: Int(ciImage.extent.height),
-          mipmapped: false
+            pixelFormat: .bgra8Unorm,
+            width: Int(ciImage.extent.width),
+            height: Int(ciImage.extent.height),
+            mipmapped: false
         )
         textureDescriptor.usage = [.shaderRead, .shaderWrite]
         textureDescriptor.storageMode = .shared
@@ -34,46 +34,44 @@ class TextureLoader {
         let texture = self.textureLoader.device.makeTexture(descriptor: textureDescriptor)!
         
         self.ciContext.render(
-          ciImage,
-          to: texture,
-          commandBuffer: nil,
-          bounds: ciImage.extent,
-          colorSpace: ciContext.workingColorSpace ?? CGColorSpaceCreateDeviceRGB()
+            ciImage,
+            to: texture,
+            commandBuffer: nil,
+            bounds: ciImage.extent,
+            colorSpace: ciContext.workingColorSpace ?? CGColorSpaceCreateDeviceRGB()
         )
-    
-    return texture
-    #endif
-        
-    return try await self.textureLoader.newTexture(
-      cgImage: cgImage,
-      options: [
-        .textureStorageMode: MTLStorageMode.shared.rawValue
-      ]
-    )
-  }
+        return texture
+#else
+        return try await self.textureLoader.newTexture(
+            cgImage: cgImage,
+            options: [
+                .textureStorageMode: MTLStorageMode.shared.rawValue
+            ]
+        )
+#endif
+    }
   
-  func unloadTexture(texture: MTLTexture) -> UIImage {
-    let ciImage = CIImage(mtlTexture: texture)!
-      let transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1).translatedBy(x: 0, y: ciImage.extent.height)
-    let transformed = ciImage.transformed(by: transform)
-    
-    let cgImage = self.ciContext.createCGImage(transformed, from: transformed.extent)!
-    return UIImage(cgImage: cgImage)
-  }
+    func unloadTexture(texture: MTLTexture) -> UIImage {
+        let ciImage = CIImage(mtlTexture: texture)!
+        let transform = CGAffineTransform.identity.scaledBy(x: 1, y: -1).translatedBy(x: 0, y: ciImage.extent.height)
+        let transformed = ciImage.transformed(by: transform)
+        let cgImage = self.ciContext.createCGImage(transformed, from: transformed.extent)!
+        return UIImage(cgImage: cgImage)
+    }
 }
 
 fileprivate extension CGImagePropertyOrientation {
-  init(_ uiOrientation: UIImage.Orientation) {
-    switch uiOrientation {
-      case .up: self = .up
-      case .upMirrored: self = .upMirrored
-      case .down: self = .down
-      case .downMirrored: self = .downMirrored
-      case .left: self = .left
-      case .leftMirrored: self = .leftMirrored
-      case .right: self = .right
-      case .rightMirrored: self = .rightMirrored
-      @unknown default: self = .up
-    }
-  }
+      init(_ uiOrientation: UIImage.Orientation) {
+            switch uiOrientation {
+              case .up: self = .up
+              case .upMirrored: self = .upMirrored
+              case .down: self = .down
+              case .downMirrored: self = .downMirrored
+              case .left: self = .left
+              case .leftMirrored: self = .leftMirrored
+              case .right: self = .right
+              case .rightMirrored: self = .rightMirrored
+              @unknown default: self = .up
+            }
+      }
 }

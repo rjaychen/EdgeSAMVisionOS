@@ -15,7 +15,11 @@ kernel void preprocessing_kernel(texture2d<float, access::sample> texture [[ tex
     if (xy.x >= input.size.x || xy.y >= input.size.y) return;
     
     const float2 uv = float2(xy) / float2(input.size);
-    float4 color = texture.sample(linear_sampler, uv);
+    float2 final_uv = uv;
+    if (input.size.x > input.size.y) {
+        final_uv = float2(uv.x + float(input.padding.y)/float(input.size.x), uv.y); // correct uv position.
+    }
+    float4 color = texture.sample(linear_sampler, final_uv);
     color.rgb = (color.rgb - input.mean) / input.std; // normalize color into 0-1 range
     
     const int index = xy.y * (input.size.x + input.padding.x) + xy.x + input.padding.y; // downsize image with aspect ratio
@@ -35,7 +39,6 @@ kernel void postprocessing_kernel(texture2d<float, access::sample> mask [[ textu
     
     const float2 uv = float2(xy) / float2(output_read.get_width(), output_read.get_height());
     const float2 mask_uv = uv * input.scaleSizeFactor;
-    
     const float4 mask_value = 1.0 - clamp(mask.sample(linear_sampler, mask_uv), float4(0), float4(1));
     
     output.write(mask_value, xy);

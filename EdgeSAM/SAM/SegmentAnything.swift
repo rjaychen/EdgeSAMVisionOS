@@ -1,6 +1,18 @@
 import Metal
 import CoreML
 
+public struct Point: Equatable {
+    public var x: Float
+    public var y: Float
+    public var label: Int
+      
+    public init(x: Float, y: Float, label: Int) {
+        self.x = x
+        self.y = y
+        self.label = label
+    }
+}
+
 public class SegmentAnything {
     public let device: MTLDevice
     private let commandQueue: MTLCommandQueue!
@@ -42,7 +54,7 @@ public class SegmentAnything {
         //print(self.imageProcessor.mapPoints(points: [(100.0, 100.0)]))
     }
     
-    public func predictMask(points: [(Float, Float, Int)]) -> [MTLTexture] {
+    public func predictMask(points: [Point]) -> [MTLTexture] {
         let (pointsTensor, labelTensor) = self.imageProcessor.mapPoints(points: points)
         
         let decoderInput = edge_sam_3x_decoderInput(image_embeddings: self.imageEmbeddings, point_coords: pointsTensor, point_labels: labelTensor)

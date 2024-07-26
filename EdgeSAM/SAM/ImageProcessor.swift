@@ -110,7 +110,7 @@ class ImageProcessor {
         
         let commandBuffer = commandQueue.makeCommandBuffer()!
         
-        let threadgroupSize = MTLSize(width: self.postprocessComputePipelineState.threadExecutionWidth, // MARK: Diff from original
+        let threadgroupSize = MTLSize(width: self.postprocessComputePipelineState.threadExecutionWidth,
                                       height: self.postprocessComputePipelineState.maxTotalThreadsPerThreadgroup / self.postprocessComputePipelineState.threadExecutionWidth,
                                       depth: 1)
         let gridSizeOrThreads: MTLSize
@@ -150,7 +150,7 @@ class ImageProcessor {
 #if os(visionOS) && targetEnvironment(simulator)
                 maskTexture = self.device.makeTexture(descriptor: maskTextureDescriptor)!
                 maskTexture.replace(region: MTLRegion(origin: MTLOrigin(x: 0, y: 0, z: 0),
-                                                      size: MTLSize(width: maskTexture.width, 
+                                                      size: MTLSize(width: maskTexture.width,
                                                                     height: maskTexture.height,
                                                                     depth: 1)),
                                     mipmapLevel: 0,
@@ -191,14 +191,14 @@ class ImageProcessor {
     }
     
     /// Returns MLMultiArray for points and labels based on a tuple point: (x, y, label)
-    func mapPoints(points: [(Float, Float, Int)]) -> (MLMultiArray, MLMultiArray) {
+    func mapPoints(points: [Point]) -> (MLMultiArray, MLMultiArray) {
         let pointsShape = [1, points.count, 2]
         let labelsShape = [1, points.count]
         let scaleWidth = Float(self.resizedWidth) / Float(self.originalWidth)
         let scaleHeight = Float(self.resizedHeight) / Float(self.originalHeight)
         
-        let pointsTensor = MLShapedArray<Float>(scalars: points.map({[$0.0 * scaleWidth, $0.1 * scaleHeight]}).reduce(into: [], { $0.append(contentsOf: $1)}), shape: pointsShape)
-        let labelTensor = MLShapedArray<Float>(scalars: points.map({Float($0.2)}), shape: labelsShape)
+        let pointsTensor = MLShapedArray<Float>(scalars: points.map({[$0.x * scaleWidth, $0.y * scaleHeight]}).reduce(into: [], { $0.append(contentsOf: $1)}), shape: pointsShape)
+        let labelTensor = MLShapedArray<Float>(scalars: points.map({Float($0.label)}), shape: labelsShape)
         
         return (MLMultiArray(pointsTensor), MLMultiArray(labelTensor))
     }
