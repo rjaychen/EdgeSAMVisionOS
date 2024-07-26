@@ -12,7 +12,6 @@
 		327CBC982C52CD9700DFAA49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC972C52CD9700DFAA49 /* ContentView.swift */; };
 		327CBC9A2C52CD9700DFAA49 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC992C52CD9700DFAA49 /* AppModel.swift */; };
 		327CBC9C2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */; };
-		327CBC9E2C52CD9700DFAA49 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */; };
 		327CBCA02C52CD9800DFAA49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */; };
 		327CBCA32C52CD9800DFAA49 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327CBCA22C52CD9800DFAA49 /* Preview Assets.xcassets */; };
 		327CBCAB2C52CE3000DFAA49 /* SegmentAnything.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCAA2C52CE2900DFAA49 /* SegmentAnything.swift */; };
@@ -21,6 +20,8 @@
 		327CBCB22C52CFB400DFAA49 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCB12C52CFAF00DFAA49 /* ImageProcessor.swift */; };
 		327CBCB82C52D20E00DFAA49 /* ImageProcessingFuncs.metal in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCB72C52D1FD00DFAA49 /* ImageProcessingFuncs.metal */; };
 		327CBCBC2C52E44B00DFAA49 /* TextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327CBCBB2C52E44800DFAA49 /* TextureLoader.swift */; };
+		D3BDBC902C53337100182BD5 /* MaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BDBC8F2C53336F00182BD5 /* MaskProcessor.swift */; };
+		D3BDBC922C53339A00182BD5 /* mask.metal in Sources */ = {isa = PBXBuildFile; fileRef = D3BDBC912C53339600182BD5 /* mask.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +31,6 @@
 		327CBC972C52CD9700DFAA49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		327CBC992C52CD9700DFAA49 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
-		327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		327CBCA22C52CD9800DFAA49 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		327CBCA42C52CD9800DFAA49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +42,8 @@
 		327CBCB92C52D99A00DFAA49 /* SharedInputs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedInputs.h; sourceTree = "<group>"; };
 		327CBCBA2C52DA3E00DFAA49 /* EdgeSAM-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EdgeSAM-Bridging-Header.h"; sourceTree = "<group>"; };
 		327CBCBB2C52E44800DFAA49 /* TextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLoader.swift; sourceTree = "<group>"; };
+		D3BDBC8F2C53336F00182BD5 /* MaskProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskProcessor.swift; sourceTree = "<group>"; };
+		D3BDBC912C53339600182BD5 /* mask.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = mask.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +84,6 @@
 				327CBCB02C52CFA100DFAA49 /* SAM */,
 				327CBC992C52CD9700DFAA49 /* AppModel.swift */,
 				327CBC9B2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift */,
-				327CBC9D2C52CD9700DFAA49 /* ImmersiveView.swift */,
 				327CBCAD2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage */,
 				327CBCAC2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage */,
 				327CBC9F2C52CD9800DFAA49 /* Assets.xcassets */,
@@ -111,6 +112,8 @@
 		327CBCB02C52CFA100DFAA49 /* SAM */ = {
 			isa = PBXGroup;
 			children = (
+				D3BDBC912C53339600182BD5 /* mask.metal */,
+				D3BDBC8F2C53336F00182BD5 /* MaskProcessor.swift */,
 				327CBCB92C52D99A00DFAA49 /* SharedInputs.h */,
 				327CBCBA2C52DA3E00DFAA49 /* EdgeSAM-Bridging-Header.h */,
 				327CBCB72C52D1FD00DFAA49 /* ImageProcessingFuncs.metal */,
@@ -197,13 +200,14 @@
 				327CBC9C2C52CD9700DFAA49 /* ToggleImmersiveSpaceButton.swift in Sources */,
 				327CBCB22C52CFB400DFAA49 /* ImageProcessor.swift in Sources */,
 				327CBC982C52CD9700DFAA49 /* ContentView.swift in Sources */,
-				327CBC9E2C52CD9700DFAA49 /* ImmersiveView.swift in Sources */,
 				327CBCB82C52D20E00DFAA49 /* ImageProcessingFuncs.metal in Sources */,
 				327CBC9A2C52CD9700DFAA49 /* AppModel.swift in Sources */,
 				327CBC962C52CD9700DFAA49 /* EdgeSAMApp.swift in Sources */,
+				D3BDBC902C53337100182BD5 /* MaskProcessor.swift in Sources */,
 				327CBCAE2C52CF5800DFAA49 /* edge_sam_3x_encoder.mlpackage in Sources */,
 				327CBCAF2C52CF5800DFAA49 /* edge_sam_3x_decoder.mlpackage in Sources */,
 				327CBCAB2C52CE3000DFAA49 /* SegmentAnything.swift in Sources */,
+				D3BDBC922C53339A00182BD5 /* mask.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

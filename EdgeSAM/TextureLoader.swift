@@ -54,7 +54,7 @@ class TextureLoader {
   
   func unloadTexture(texture: MTLTexture) -> UIImage {
     let ciImage = CIImage(mtlTexture: texture)!
-    let transform = CGAffineTransform.identity.scaledBy(x: 1, y: -1).translatedBy(x: 0, y: ciImage.extent.height)
+      let transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1).translatedBy(x: 0, y: ciImage.extent.height)
     let transformed = ciImage.transformed(by: transform)
     
     let cgImage = self.ciContext.createCGImage(transformed, from: transformed.extent)!

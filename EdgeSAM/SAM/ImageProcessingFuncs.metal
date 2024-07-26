@@ -5,7 +5,6 @@ using namespace metal;
 
 constexpr sampler linear_sampler = sampler(filter::linear);
 
-
 kernel void preprocessing_kernel(texture2d<float, access::sample> texture [[ texture(0) ]],
                                  constant PreprocessingInput& input [[ buffer(0) ]],
                                  device float* rBuffer [[ buffer(1) ]],
@@ -28,15 +27,16 @@ kernel void preprocessing_kernel(texture2d<float, access::sample> texture [[ tex
 }
 
 kernel void postprocessing_kernel(texture2d<float, access::sample> mask [[ texture(0) ]],
-                                  texture2d<float, access::read_write> output [[ texture(1) ]],
+                                  texture2d<float, access::read> output_read [[ texture(1) ]],
+                                  texture2d<float, access::write> output [[ texture(2) ]],
                                   constant PostprocessingInput& input [[ buffer(0) ]],
                                   uint2 xy [[ thread_position_in_grid ]]) {
-    if (xy.x >= output.get_width() || xy.y >= output.get_height()) return;
+    if (xy.x >= output_read.get_width() || xy.y >= output_read.get_height()) return;
     
-    const float2 uv = float2(xy) / float2(output.get_width(), output.get_height());
+    const float2 uv = float2(xy) / float2(output_read.get_width(), output_read.get_height());
     const float2 mask_uv = uv * input.scaleSizeFactor;
     
-    const float4 mask_value = 1.0f - clamp(mask.sample(linear_sampler, mask_uv), float4(0), float4(1));
+    const float4 mask_value = 1.0 - clamp(mask.sample(linear_sampler, mask_uv), float4(0), float4(1));
     
     output.write(mask_value, xy);
 }

@@ -120,7 +120,7 @@ class ImageProcessor {
                                         depth: 1)
         } else {
             gridSizeOrThreads = MTLSize(width: (self.originalWidth + threadgroupSize.width - 1) / threadgroupSize.width,
-                                        height: (self.originalWidth + threadgroupSize.height - 1) / threadgroupSize.height,
+                                        height: (self.originalHeight + threadgroupSize.height - 1) / threadgroupSize.height,
                                         depth: 1)
         }
         let outputMaskTextureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .r32Float,
@@ -147,15 +147,27 @@ class ImageProcessor {
             
             for maskIndex in 0..<masks.shape[1].intValue { // 4 masks total
                 let maskTexture: MTLTexture
+#if os(visionOS) && targetEnvironment(simulator)
+                maskTexture = self.device.makeTexture(descriptor: maskTextureDescriptor)!
+                maskTexture.replace(region: MTLRegion(origin: MTLOrigin(x: 0, y: 0, z: 0),
+                                                      size: MTLSize(width: maskTexture.width, 
+                                                                    height: maskTexture.height,
+                                                                    depth: 1)),
+                                    mipmapLevel: 0,
+                                    withBytes: maskPointer + maskIndex * maskStride,
+                                    bytesPerRow: strides[2] * MemoryLayout<Float>.stride)
+#else
                 let maskBuffer = self.device.makeBuffer(bytesNoCopy: maskPointer + maskIndex * maskStride,
                                                         length: maskStride * MemoryLayout<Float>.stride)!
                 maskTexture = maskBuffer.makeTexture(descriptor: maskTextureDescriptor,
                                                      offset: 0,
                                                      bytesPerRow: strides[2] * MemoryLayout<Float>.stride)!
+#endif
+                let outputReadTexture = self.device.makeTexture(descriptor: outputMaskTextureDescriptor)!
                 let outputMaskTexture = self.device.makeTexture(descriptor: outputMaskTextureDescriptor)!
-                
                 computeCommandEncoder.setTexture(maskTexture, index: 0)
-                computeCommandEncoder.setTexture(outputMaskTexture, index: 1)
+                computeCommandEncoder.setTexture(outputReadTexture, index: 1)
+                computeCommandEncoder.setTexture(outputMaskTexture, index: 2)
                 
                 if self.device.supportsFamily(.common3) {
                     computeCommandEncoder.dispatchThreads(gridSizeOrThreads, threadsPerThreadgroup: threadgroupSize)

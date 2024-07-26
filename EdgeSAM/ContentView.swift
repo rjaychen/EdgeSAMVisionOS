@@ -14,26 +14,31 @@ struct ContentView: View {
     
     let segmentAnything: SegmentAnything
     let textureLoader: TextureLoader
-    @State private var inputImage: UIImage = UIImage(named: "cameraframe")!
+    let maskProcessor: MaskProcessor
+    
+    @State private var inputImage: UIImage = UIImage(named: "labimage")!
     @State private var resultImage: UIImage?
     
     var body: some View {
         VStack {
-            Image(uiImage: inputImage)
-                .resizable()
-                .scaledToFit()
-            if let image = resultImage {
-                Image(uiImage: image)
+            HStack{
+                Image(uiImage: inputImage)
                     .resizable()
                     .scaledToFit()
+                if let image = resultImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
             }
             Button("Segment") {
                 Task(priority: .high) {
                     let imageTexture = try! await self.textureLoader.loadTexture(uiImage: inputImage)
                     self.segmentAnything.preprocess(image: imageTexture)
-                    let masks = self.segmentAnything.predictMask(points: [(100.0, 100.0, 1)])
-                    let ciImage = CIImage(mtlTexture: masks.first!)
-                    let uiImage = UIImage(ciImage: ciImage!)
+                    let masks = self.segmentAnything.predictMask(points: [(500, 540, 1)])
+                    //let maskTexture = self.maskProcessor.apply(input: imageTexture, mask: masks.first!, mode: .additive)
+                    let uiImage = self.textureLoader.unloadTexture(texture: masks.first!)
+                    
                     resultImage = uiImage
                     //print(self.segmentAnything.imageEmbeddings!)
                 }
